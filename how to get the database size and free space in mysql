@@ -1,4 +1,4 @@
-how to get the database size and free space in mysql
+##how to get the database size and free space in mysql
 find the size of the databases with the following query:
 
 SELECT
