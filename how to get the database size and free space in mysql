@@ -1,0 +1,38 @@
+how to get the database size and free space in mysql
+find the size of the databases with the following query:
+
+SELECT
+        table_schema "Data Base Name",
+        sum( data_length + index_length ) / 1024 / 1024 "Data Base Size in MB"
+FROM
+        information_schema.TABLES
+GROUP BY
+        table_schema ;
+the output looks something like:
+
++--------------------+----------------------+
+| Data Base Name     | Data Base Size in MB |
++--------------------+----------------------+
+| information_schema |           0.00878906 |
+| testdb             |           0.09375000 |
+| mydb               |          10.54904938 |
++--------------------+----------------------+
+find the amount of free space available for databases:
+
+SELECT
+        table_schema "Data Base Name",
+        sum( data_length + index_length ) / 1024 / 1024 "Data Base Size in MB",
+        sum( data_free )/ 1024 / 1024 "Free Space in MB"
+FROM
+        information_schema.TABLES
+GROUP BY
+        table_schema ;
+output:
+
++--------------------+----------------------+------------------+
+| Data Base Name     | Data Base Size in MB | Free Space in MB |
++--------------------+----------------------+------------------+
+| information_schema |           0.00878906 |       0.00000000 |
+| testdb             |           0.09375000 |      21.00000000 |
+| mydb               |          10.54904938 |     679.00002670 |
++--------------------+----------------------+------------------+
