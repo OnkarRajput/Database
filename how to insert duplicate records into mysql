@@ -1,0 +1,13 @@
+############ how to insert duplicate records into mysql ###############################
+this can, of course, be dangerous, and assumes one knows what one is doing…
+disable mysql foreign key constraints, primary keys, and allow duplicate inserts:
+
+
+
+SET FOREIGN_KEY_CHECKS=0;
+SET UNIQUE_CHECKS = 0;
+INSERT IGNORE INTO
+enable constraints again with:
+
+SET UNIQUE_CHECKS = 1;
+SET FOREIGN_KEY_CHECKS=1;
